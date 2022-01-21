@@ -125,7 +125,7 @@ $(".list-group").on("click", "span", function() {
   $(this).replaceWith(dateInput);
   // enable jquery ui datepicker
   dateInput.datepicker({
-     minDate: 1,
+    minDate: 1,
     onClose: function() {
       // when calendar is closed, force a "change" event on the 'dateInput'
       $(this).trigger("change");
