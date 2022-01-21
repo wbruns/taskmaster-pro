@@ -24,9 +24,7 @@ var createTask = function(taskText, taskDate, taskList) {
 var auditTask = function(taskEl) {
   // get date from task element
   var date = $(taskEl).find("span").text().trim();
-  // ensure it worked
-  console.log(date);
-
+  
   // convert to moment obect at 5:00pm
   var time = moment(date, "L").set("hour", 17);
   
@@ -40,6 +38,7 @@ var auditTask = function(taskEl) {
   else if (Math.abs(moment().diff(time, "days")) <= 2) {
     $(taskEl).addClass("list-group-item-warning");
   }
+  console.log(taskEl);
 };
 
 var loadTasks = function() {
@@ -279,4 +278,9 @@ $("#remove-tasks").on("click", function() {
 // load tasks for the first time
 loadTasks();
 
-
+// find all list items, send them each to auditTask every 30 mins
+setInterval(function() {
+  $(".card .list-group-item").each(function(index, el) {
+    auditTask(el);
+  });
+}, (1000 * 60) * 30);
